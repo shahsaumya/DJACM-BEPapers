@@ -1,0 +1,105 @@
+
+<html>
+{% load static %}
+
+  <head>
+      <title>name</title>
+    
+      <style>
+      body {
+        background: url("{% static 'r3.jpg' %}") no-repeat center center fixed ;
+        background-size:cover;
+        padding-top:80px;
+        
+        opacity: 0.6;
+
+
+      }
+      ul
+      {
+        
+        padding:30px;
+
+      }
+      .new {
+          margin: 5px;
+          padding: 8px;
+          text-align: :center;
+          font-size:20px;
+          width: 35%;
+          margin-left: 150px;
+          
+          opacity: 1;
+         
+          list-style-type: none;
+          
+          font-weight: bolder;
+
+      }
+      img {
+        padding: 20px;
+        margin: 10px;
+        
+        margin-left: 140px;
+        
+        opacity:1;
+      }
+
+
+
+      </style>
+  </head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+  <body>
+
+<!-- Navbar -->
+<ul class="w3-navbar w3-black w3-card-2 w3-top w3-left-align w3-large">
+  <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
+    <a class="w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+  </li>
+  <li><a href="/index/" class="w3-padding-large w3-hover-white">Home</a></li>
+
+  <li class="w3-hide-small"><a href="/contact/" class="w3-padding-large w3-hover-white">Post</a></li>
+  <li class="w3-hide-small"><a href="/search/" class="w3-padding-large w3-white">Search</a></li>
+
+</ul>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:51px">
+  <ul class="w3-navbar w3-left-align w3-large w3-black">
+    <li><a class="w3-padding-large" href="/index/">Home</a></li>
+
+    <li><a class="w3-padding-large" href="/contact/">Post</a></li>
+    <li><a class="w3-padding-large" href="/search/">Search</a></li>
+  
+</div>
+
+    <div id="#a" style="padding-left:110px ;
+        padding-right:110px ;">
+ 
+    {% if travel %}
+        <!--<p>Found {{ travel|length }} name{{ travel|pluralize }}.</p> -->
+        <ul >
+            {% for place in travel %}
+            <li class="new">{{ place.name }}</li>
+            <li class="new">{{place.location}}</li>
+            <li class="new">{{place.notes}}</li>
+           <iframe src="/media/{{place.image}}#toolbar=0" width="100%" height="100%" ></iframe>
+            
+
+
+
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No names matched your search criteria.</p>
+    {% endif %}
+</div>
+  </body>
+</html>

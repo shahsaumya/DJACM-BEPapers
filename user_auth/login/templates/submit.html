@@ -1,0 +1,109 @@
+
+ 
+<html>
+<head>
+    <title>Contact us</title>
+    <style type="text/css">
+    table {
+        font-size: 15px;
+        padding: 25px;
+        border-spacing: 25px;
+        color: white;
+
+    }
+    input {
+        font-size: 14px;
+        padding-left: 40px;
+        width: 240px;
+    }
+    #ss {
+
+        margin-top:135px;
+        font-size: 20px;
+        padding: 20px;
+        border: black 3px solid;
+        width:440px;
+        background-color: #005c99;
+        text-align:center;
+        color: white;
+        margin-left: 100px;
+    }
+    body {
+        
+        padding: 0px;
+        background-color: white ;
+        
+        opacity: 0.7;
+
+     
+
+
+    }
+
+    #d {
+        background-color: #005c99;
+        width:440px;
+        border: black 3px solid;
+        margin-left: 100px;
+        
+
+
+    }
+
+
+    </style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+</head>
+<body >
+
+
+<ul class="w3-navbar w3-black w3-card-2 w3-top w3-left-align w3-large">
+  <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
+    <a class="w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+  </li>
+  <li ><a href="/index/" class="w3-padding-large w3-hover-white">Home</a></li>
+
+  <li class="w3-hide-small"><a href="/contact/" class="w3-padding-large w3-white">Post</a></li>
+  <li class="w3-hide-small"><a href="/search/" class="w3-padding-large w3-hover-white">Search</a></li>
+
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:51px">
+  <ul class="w3-navbar w3-left-align w3-large w3-black">
+    <li><a class="w3-padding-large" href="/index/">Home</a></li>
+    
+    <li><a class="w3-padding-large" href="/contact/">Post</a></li>
+    <li><a class="w3-padding-large" href="/search/">Search</a></li>
+ 
+
+  </ul>
+</div>
+
+
+
+
+
+    <h1 id="ss">B.E. PROJECTS</h1>
+ 
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+ 
+    <form action="" method="post" enctype="multipart/form-data">
+        <div id="d" ><table>
+            {{ form.as_table }}
+        </table>
+        {% csrf_token %}
+        <input type="submit" value="Submit"></div>
+    </form>
+   
+</body>
+</html>

@@ -1,0 +1,105 @@
+
+<html>
+{% load static %}
+<head>
+    <title>Search</title>
+
+    <style type="text/css">
+    h1 {
+        background-color: #D0D0D0 ;
+        opacity: 0.6;
+        padding: 10px;
+        width: 58%;
+        border: black 3px solid;   
+
+    }
+    body {
+
+        background-color:#ff6666;
+        padding-left: 600px;
+        padding-top: 180px;
+
+ background: url("{% static 'search1.jpg' %}") no-repeat center center fixed ;
+  background-size:cover;
+
+    }
+    input {
+     border: none;
+     width: 60%;
+    padding: 20px;
+    font-size: 20px;
+    font-style: italic;
+
+}   
+    #ss {
+        background-color:#D0D0D0 ;
+        padding: 10px;
+        width: 50%;
+        font-size: 20px;
+        border: black 3px solid;
+        opacity: 0.6;
+
+    }
+    #qq {
+        position: absolute;
+        left: 0px;
+    }
+
+        
+    </style>  
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+</head>
+<body>
+
+
+
+<div id="qq">
+<ul class="w3-navbar w3-black w3-card-2 w3-top w3-left-align w3-large">
+  <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
+    <a class="w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+  </li>
+  <li><a href="/index/" class="w3-padding-large w3-hover-white">Home</a></li>
+ 
+  <li class="w3-hide-small"><a href="/contact/" class="w3-padding-large w3-hover-white">Post</a></li>
+  <li class="w3-hide-small"><a href="/search/" class="w3-padding-large w3-white">Search</a></li>
+  
+</ul>
+</div>
+<!-- Navbar on small screens -->
+
+<div id="navDemo" class="w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:51px">
+  <ul class="w3-navbar w3-left-align w3-large w3-black">
+    <li><a class="w3-padding-large" href="/index/">Home</a></li>
+
+    <li><a class="w3-padding-large" href="/contact/">Post</a></li>
+    <li><a class="w3-padding-large" href="/search/">Search</a></li>
+
+  </ul>
+</div>
+
+
+
+
+ 
+
+
+    <h1> Review Projects</h1>
+    {% for x in full %}
+    <ul>
+    <li id="ss">{{x.name}}</li>
+    </ul>
+    {% endfor %}
+
+
+
+    <form action="/search/" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+    </form>
+   
+</body>
+</html>

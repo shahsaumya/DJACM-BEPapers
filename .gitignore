@@ -87,3 +87,9 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+*.sqlite3
+user_auth/login/__pycache__
+user_auth/user_auth/__pycache__
+user_auth/user_auth/migrations
+user_auth/login/migrations

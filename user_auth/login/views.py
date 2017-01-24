@@ -55,7 +55,7 @@ def user_login(request):
                 login(request, user)
                 return redirect('/index/')
             else:
-                return redirect("Your account is disabled.")
+                return HttpResponse("Your account is disabled.")
         else:
             # Bad login details were provided. So we can't log the user in.
             print ("Invalid login details: {0}, {1}".format(username, password))

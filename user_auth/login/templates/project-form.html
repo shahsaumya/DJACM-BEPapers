@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		{% load static %}
+		<title> Add a new project | Papers </title>
+	</head>
+	<body>
+		<form id="project_form" method="post" action="{% url 'add_project' %}">
+			{{project_form.as_p}}
+			<label for="file_upload"> Upload PDF </label>
+			<input name="file_upload" id="pdf_upload" type="file" required> </input>	
+			<br>
+			<br>
+			<br>
+			<input name="submit_button" id="submit_button" type="submit"> </input>
+		</form>
+		<script src="{% static 'js/qwest.min.js' %}"> </script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-storage.js"></script>
+		<script>
+			// Initialize Firebase
+
+			var id =  function(id){ return document.getElementById(id); }
+
+			var config = {
+				apiKey: "AIzaSyCxHaCCZwuMxNN1OB58_CjeB_yUMmWc5mE",
+				authDomain: "bepapers-66893.firebaseapp.com",
+				databaseURL: "https://bepapers-66893.firebaseio.com",
+				storageBucket: "bepapers-66893.appspot.com",
+				messagingSenderId: "371274869294"
+			};
+
+			firebase.initializeApp(config);
+			var storage = firebase.storage();
+			var storage_ref = storage.ref();
+			var pdfs = storage_ref.child('pdfs');
+			var firebase_path = null;
+			var uploaded_pdf = null;
+
+			//Create a unique firebase path
+			function create_firebase_path(){
+				var current_time = Math.floor(Date.now());
+				var val = ["{{username}}", current_time];
+				firebase_path = val.join('/');
+				return val;
+			}
+
+			//Handle file uploading to firebase
+			function handle_file_upload(event){
+				if(event.target.files && event.target.files.length>0){
+					uploaded_pdf = event.target.files[0];
+				}
+			}
+			
+			var 
+				t = id('id_title'),
+				desc = id('id_description'),
+				vid = id('id_video_url');
+
+			function form_upload(e){
+				e.preventDefault();
+				var project_name = t.value,
+				description = desc.value,
+				video = vid.value;
+
+				if(!project_name || project_name == '') t.focus();
+				else if(!description || description == '') desc.focus();
+				else if(!uploaded_pdf) id('pdf_upload').focus();
+
+				
+			       	else{
+					if(vid == '') vid = 'NA';
+					pdfs.child( create_firebase_path().join('/'))
+					.put(uploaded_pdf)
+					.then(function(snapshot){
+						console.log(snapshot.downloadURL);
+						window.alert('file entered');
+						var fd = {}
+						fd.title = project_name;
+						fd.description = description;
+						fd.video = video;
+						fd.pdf_url = firebase_path;
+						console.log(fd);
+						qwest.post('{% url 'add_project' %}', fd)
+							.then(function(){
+								window.location.href = '/index/';
+							});
+					});
+				}	
+			}
+
+			document.getElementById('pdf_upload').addEventListener('change', handle_file_upload);
+			document.getElementById('submit_button').addEventListener('click', form_upload);
+		</script>
+	</body>
+</html>

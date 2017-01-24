@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^logout/$', views.user_logout, name='logout'),             
     url(r'^add-user/$', views.add_user, name='add_user'),
     url(r'^login/$', views.login_form, name='login'),
-    url(r'^add-project/$', views.add_project_form, name='add_project'),
+    url(r'^new-project/$', views.project_form, name='new_project'),
+    url(r'^add-project/$', views.add_project, name='add_project'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

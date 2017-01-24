@@ -13,3 +13,13 @@ class UserProfileForm(forms.ModelForm):
 	class Meta:
 		model = UserProfile
 		fields = ('branch','domain')
+
+class ProjectForm(forms.ModelForm):
+    class Meta: 
+        model = Project
+        fields = ('title', 'description', 'video_url')
+        labels = {
+                'title': ('Project Name'),
+                'description':('Add a description'),
+                'video_url': ('Add a video'),
+                }

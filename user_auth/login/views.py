@@ -115,6 +115,11 @@ def add_project(request):
         return redirect('/index/')
         
 
+#def login(request):
+#    return render(request, 'about.html')
+
+def upload(request):
+    return render(request , 'services.html')
 
 @csrf_exempt
 @login_required

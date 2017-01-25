@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,18 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/ico/favicon.png">
+    <link rel="shortcut icon" href="{% static 'assets/ico/favicon.png' %}">
 
     <title>SPOT - Free Bootstrap 3 Theme</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/font-awesome.min.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
 
-	<script src="assets/js/Chart.js"></script>
+	<script src="{% static 'assets/js/Chart.js' %}"></script>
 
 	<style type="text/css">
 		iframe{
@@ -47,8 +48,8 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-center">
-            <li><a href="index.html">HOME</a></li>
-           <li class="active"><a href="about.html">LOGIN/SIGN UP</a></li>
+            <li><a href="/index/">HOME</a></li>
+           <li class="active"><a href=/about/">LOGIN/SIGN UP</a></li>
           </ul>
           <div class = "nav navbar-nav navbar-right" style = "padding-top: 15px">
             <input class = "search-text" type = text width = 250px>&nbsp&nbsp&nbsp
@@ -113,6 +114,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
   </body>
 </html>

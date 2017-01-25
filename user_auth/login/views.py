@@ -19,6 +19,10 @@ def index(request):
     return render(request,'index.html')
 
 
+def about(request):
+    return render(request,'about.html')    
+
+
 def home(request):
     return render(request,'home.html')
 
@@ -109,6 +113,7 @@ def add_project(request):
                           creator=UserProfile.objects.get(user=request.user))
         project.save()
         return redirect('/index/')
+        
 
 
 @csrf_exempt

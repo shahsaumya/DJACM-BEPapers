@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,16 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/ico/favicon.png">
+    <link rel="shortcut icon" href="{% static 'assets/ico/favicon.png' %}">
 
     <title>SPOT - Free Bootstrap 3 Theme</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/font-awesome.min.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -43,7 +44,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-center">
       
-            <li class="active"><a href="index.html">HOME</a></li>
+            <li class="active"><a href="/index/">HOME</a></li>
                  <!-- <li><a href="about.html">LOGIN /SIGN UP</a></li>-->
             <li><a href="services.html">UPLOAD</a></li>
                   <li><a href="works.html">VIEW</a></li>
@@ -101,11 +102,11 @@
 				<br><br>
 				<div class = "col-lg-4"></div>
 				<div class="col-lg-2">
-					<a href="about.html"><!--<img src="assets/img/login.jpg" alt="">--><button type="button" class="btn btn-primary btn-lg">Login</button></a>
+					<a href="/about/"><!--<img src="assets/img/login.jpg" alt="">--><button type="button" class="btn btn-primary btn-lg">Login</button></a>
 				</div>
 
 				<div class="col-lg-2">
-					<a href="about.html"><button type="button" class="btn btn-primary btn-lg">Sign Up</button></a>
+					<a href="/about/"><button type="button" class="btn btn-primary btn-lg">Sign Up</button></a>
 
 						<div class="col-lg-4">
 									</div>
@@ -121,6 +122,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
   </body>
 </html>

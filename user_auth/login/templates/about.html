@@ -17,7 +17,14 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/main.css" rel="stylesheet">
 
+	<script src="assets/js/Chart.js"></script>
 
+	<style type="text/css">
+		iframe{
+			overflow: hidden;
+			border:0px;
+		}
+	</style>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -28,7 +35,6 @@
   <body>
 
     <!-- Fixed navbar -->
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -37,16 +43,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html"></a>
-          <a class="navbar-brand" href="index.html">SVKM</a>
+          <a class="navbar-brand" href="#">SVKM</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-center">
-      
-            <li class="active"><a href="index.html">HOME</a></li>
-                 <!-- <li><a href="about.html">LOGIN /SIGN UP</a></li>-->
-            <li><a href="services.html">UPLOAD</a></li>
-                  <li><a href="works.html">VIEW</a></li>
+            <li><a href="index.html">HOME</a></li>
+           <li class="active"><a href="about.html">LOGIN/SIGN UP</a></li>
           </ul>
           <div class = "nav navbar-nav navbar-right" style = "padding-top: 15px">
             <input class = "search-text" type = text width = 250px>&nbsp&nbsp&nbsp
@@ -56,67 +58,57 @@
       </div>
     </div>
 
-
-	<div id="headerwrap">
-		<div class="container">
-			<div class="row centered">
-				<div class="col-lg-8 col-lg-offset-2">
-				<h1>B.E. PROJECTS</b></h1>
-				<h2>A Platform to view and upload projects</h2>
-				</div>
-			</div><!-- row -->
-		</div><!-- container -->
-	</div><!-- headerwrap -->
-
-
 	<div class="container w">
 		<div class="row centered">
 			<br><br>
-			<div class="col-lg-4">
-				<h4>UPLOAD</h4>
-				<p>Share  your  projects  and  let  the  world  know  about  your  skill  set</p>
-			</div><!-- col-lg-4 -->
-
-			<div class="col-lg-4">
-				<h4>VIEW</h4> 
-				<p>Read  technical  papers  and  get  inspired  to write  your  own.</p>
-			</div><!-- col-lg-4 -->
-
-			<div class="col-lg-4">
-				<h4>CONTACT</h4>
-				<p>Find  project  collaborators  and mentors  based  on  their  skills.</p>
-			</div><!-- col-lg-4 -->
+			<iframe src = "login.html"  width = 100% height = 650px></iframe>
 		</div><!-- row -->
 		<br>
 		<br>
 	</div><!-- container -->
-
-	<div id="r">
+	
+	<!-- FOOTER -->
+	<div id="f">
 		<div class="container">
 			<div class="row centered">
-				<div class="col-lg-8 col-lg-offset-2">
-					<h2>GET   STARTED </h2>
-					<p><h7>Create, Upload and View is all that it takes</h7></p>
-				</div>
-				<br><br>
-				<div class = "col-lg-4"></div>
-				<div class="col-lg-2">
-					<a href="about.html"><!--<img src="assets/img/login.jpg" alt="">--><button type="button" class="btn btn-primary btn-lg">Login</button></a>
-				</div>
-
-				<div class="col-lg-2">
-					<a href="about.html"><button type="button" class="btn btn-primary btn-lg">Sign Up</button></a>
-
-						<div class="col-lg-4">
-									</div>
-				</div><!-- row -->
-			<br>
-			<br>
-			<br>
-			<br>
-		</div><!-- container -->
-	</div><!-- DG -->
+				<a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-dribbble"></i></a>
+		
 			</div><!-- row -->
+		</div><!-- container -->
+	</div><!-- Footer -->
+
+
+	<!-- MODAL FOR CONTACT -->
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">contact us</h4>
+	      </div>
+	      <div class="modal-body">
+		        <div class="row centered">
+		        	<p>We are available 24/7, so don't hesitate to contact us.</p>
+		        	<p>
+		        		Somestreet Ave, 987<br/>
+						London, UK.<br/>
+						+44 8948-4343<br/>
+						hi@blacktie.co
+		        	</p>
+		        	<div id="mapwrap">
+		<iframe height="300" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.es/maps?t=m&amp;ie=UTF8&amp;ll=52.752693,22.791016&amp;spn=67.34552,156.972656&amp;z=2&amp;output=embed"></iframe>
+					</div>	
+		        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Save & Go</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

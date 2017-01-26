@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="{%static 'ico/favicon.png' %}">
 
    
     <!-- Bootstrap core CSS -->
@@ -16,8 +15,6 @@
 
     <!-- Custom styles for this template -->
     <link href="{%static 'css/main.css' %}" rel="stylesheet">
-
-  {% load static %}
     <title> Add a new project | Papers </title>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -28,34 +25,33 @@
       input,textarea{
         float:right;
       }
+      label,p{
+        float:left;
+      }
     </style>
   </head>
 
   <body>
 
+
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/index/">SVKM</a>
-        </div>
+          <a href="/index/"><img src="{%static 'img/acm.png' %}" style = "float:left; width:6%; height:6%;"></a>
+
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-center">
             <li><a href="/index/">HOME</a></li>
-            <li class="active"><a href="/upload/">UPLOAD</a></li>
-            <li><a href="#">VIEW</a></li>
-             
+            <li class = "active"><a href="/upload/">UPLOAD</a></li>
+                  <li><a href="#">VIEW</a></li>
           </ul>
           <div class = "nav navbar-nav navbar-right" style = "padding-top: 15px">
             <input class = "search-text" type = text width = 250px>&nbsp&nbsp&nbsp
-        	<i class = "fa fa-search"></i>
+          <i class = "fa fa-search"></i>
         </div>
         </div><!--/.nav-collapse -->
       </div>
+    </div>
     </div>
 
 	<div id="blue">
@@ -70,8 +66,7 @@
 
 
 	<div class="container w" >
-	<div style="margin-left:330px; margin-right:330px; margin-top:60px">
-
+	<div class = "row centered" style="margin-left:33% ; margin-right:33%; margin-top:60px; max-width:100%">
 
 
   <form id="project_form" method="post" action="{% url 'add_project' %}">

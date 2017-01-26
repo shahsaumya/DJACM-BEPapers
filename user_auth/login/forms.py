@@ -21,11 +21,11 @@ class ProjectForm(forms.ModelForm):
     )
 
     description = forms.CharField(
-       widget=forms.Textarea(attrs={'rows':"5",'class': "input-lg",'cols':"33"}),
+       widget=forms.Textarea(attrs={'rows':"5",'class': "input-lg",'cols':"40"}),
     )
 
     video_url = forms.CharField(
-        widget=forms.TextInput(attrs={'class': "input-lg",'size':"36"}),
+        widget=forms.TextInput(attrs={'class': "input-lg",'size':"40"}),
     )
 
    

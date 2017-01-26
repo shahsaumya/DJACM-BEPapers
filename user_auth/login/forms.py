@@ -18,15 +18,15 @@ class UserForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     branch = forms.CharField(
-        widget = formas.TextInput(attrs = {'class':"input-lg", 'size':"40"}),
+        widget = forms.TextInput(attrs = {'class':"input-lg", 'size':"40"}),
     )
-    domain = forms.CharFeild(
+    domain = forms.CharField(
         widget = forms.TextInput(attrs = {'class':"input-lg", 'size':"40"}),
     )
     class Meta:
-	    model = UserProfile
-		fields = ('branch','domain')
-		labels = {
+        model = UserProfile
+        fields = ('branch','domain')
+        labels = {
                  'branch' :('Branch'),
                  'domain' :('Domain'),
                  }

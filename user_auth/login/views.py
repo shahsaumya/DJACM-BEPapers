@@ -34,17 +34,11 @@ def register(request):
     user_form = UserForm()
     profile_form = UserProfileForm()
 
-    if request.user.is_authenticated():
-        return redirect('/index/')
+    #if request.user.is_authenticated():
+     #   return redirect('/index/')
 
-    else:
-        return render(
-                      request,
-                      'register.html',
-                      {'user_form': user_form, 
-                       'profile_form': profile_form, 
-                       'registered': registered
-                      })
+    #else:
+    return render(request, 'register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 
 @csrf_protect

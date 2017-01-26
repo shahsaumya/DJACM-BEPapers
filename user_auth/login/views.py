@@ -124,7 +124,7 @@ def upload(request):
 @csrf_exempt
 @login_required
 def project_form(request):
-    return render(request, 'project-form.html', 
+    return render(request, 'services.html', 
             {'project_form': ProjectForm(),
              'username' : request.user.username})
 

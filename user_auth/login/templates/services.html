@@ -9,8 +9,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="{%static 'ico/favicon.png' %}">
 
-    <title>SPOT - Free Bootstrap 3 Theme</title>
-
+   
     <!-- Bootstrap core CSS -->
     <link href="{%static 'css/bootstrap.css' %}" rel="stylesheet">
     <link href="{%static 'css/font-awesome.min.css' %}" rel="stylesheet">
@@ -18,7 +17,8 @@
     <!-- Custom styles for this template -->
     <link href="{%static 'css/main.css' %}" rel="stylesheet">
 
-
+  {% load static %}
+    <title> Add a new project | Papers </title>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -66,61 +66,110 @@
 
 	<div class="container w" >
 	<div style="margin-left:330px; margin-right:330px; margin-top:60px">
-<div class="form-group row">
-  <label for="example-text-input" class="col-2 col-form-label">Name</label>
-  <div class="col-10">
-    <input class="form-control" type="text" value="" id="example-text-input">
-  </div>
-</div>
 
-<br>
-<div class="form-group row">
-  <label for="example-search-input" class="col-2 col-form-label">Project Partners</label>
-  <div class="col-10">
-    <input class="form-control" type="search" value="" id="example-search-input">
-  </div>
-</div>
-<br>
-<div class="form-group row">
-  <label for="example-email-input" class="col-2 col-form-label">Project Category</label>
-  <div class="col-10">
-    <input class="form-control" type="email" value="" id="example-email-input">
-  </div>
-</div>
 
-<br>
-<div class="form-group row">
-  <label for="example-url-input" class="col-2 col-form-label">Project name</label>
-  <div class="col-10">
-    <input class="form-control" type="url" value="" id="example-url-input">
-  </div>
-</div>
-<br>
 
+  <form id="project_form" method="post" action="{% url 'add_project' %}">
   <div class="form-group row">
-  <label for="comment" class="col-2 col-form-label">Languages and Framework</label>
-  <textarea class="form-control" rows="3" id="comment"></textarea>
-</div>
-<br>
+      {{project_form.as_p}}
+      </div>
+      <div class="form-group row">
+      <label for="file_upload"  class="col-2 col-form-label"> Upload PDF </label>
+      <input name="file_upload" id="pdf_upload"   type="file" required> </input>  
+      </div >
+      <br>
+     
+     <div class="row centered" >
+      <input name="submit_button" id="submit_button" type="submit" class="btn btn-primary"> </input>
+      </div >
+    </form>
+    <script src="{% static 'js/qwest.min.js' %}"> </script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-storage.js"></script>
+    <script>
+      // Initialize Firebase
 
-  <div class="form-group row">
-  <label for="comment" class="col-2 col-form-label">Project Summary</label>
-  <textarea class="form-control" rows="5" id="comment"></textarea>
-</div>
-<br>
-<div class="form-group row">
-  <label for="example-date-input" class="col-2 col-form-label">Date</label>
-  <div class="col-10">
-    <input class="form-control" type="date"  placeholder="24-01-2017"id="example-date-input">
-  </div>
-</div>
+      var id =  function(id){ return document.getElementById(id); }
+
+      var config = {
+        apiKey: "AIzaSyCxHaCCZwuMxNN1OB58_CjeB_yUMmWc5mE",
+        authDomain: "bepapers-66893.firebaseapp.com",
+        databaseURL: "https://bepapers-66893.firebaseio.com",
+        storageBucket: "bepapers-66893.appspot.com",
+        messagingSenderId: "371274869294"
+      };
+
+      firebase.initializeApp(config);
+      var storage = firebase.storage();
+      var storage_ref = storage.ref();
+      var pdfs = storage_ref.child('pdfs');
+      var firebase_path = null;
+      var uploaded_pdf = null;
+
+      //Create a unique firebase path
+      function create_firebase_path(){
+        var current_time = Math.floor(Date.now());
+        var val = ["{{username}}", current_time];
+        firebase_path = val.join('/');
+        return val;
+      }
+
+      //Handle file uploading to firebase
+      function handle_file_upload(event){
+        if(event.target.files && event.target.files.length>0){
+          uploaded_pdf = event.target.files[0];
+        }
+      }
+      
+      var 
+        t = id('id_title'),
+        desc = id('id_description'),
+        vid = id('id_video_url');
+
+      function form_upload(e){
+        e.preventDefault();
+        var project_name = t.value,
+        description = desc.value,
+        video = vid.value;
+
+        if(!project_name || project_name == '') t.focus();
+        else if(!description || description == '') desc.focus();
+        else if(!uploaded_pdf) id('pdf_upload').focus();
+
+        
+              else{
+          if(vid == '') vid = 'NA';
+          pdfs.child( create_firebase_path().join('/'))
+          .put(uploaded_pdf)
+          .then(function(snapshot){
+            console.log(snapshot.downloadURL);
+            window.alert('file entered');
+            var fd = {}
+            fd.title = project_name;
+            fd.description = description;
+            fd.video = video;
+            fd.pdf_url = firebase_path;
+            console.log(fd);
+            qwest.post('{% url 'add_project' %}', fd)
+              .then(function(){
+                window.location.href = '/index/';
+              });
+          });
+        } 
+      }
+
+      document.getElementById('pdf_upload').addEventListener('change', handle_file_upload);
+      document.getElementById('submit_button').addEventListener('click', form_upload);
+    </script>
 
 
-<br>
-<div class="row centered" >
-<button type="button" class="btn btn-primary" >SUBMIT</button>
-</div>
-<br>
+
+
+ 
+
+  
+
+
 </div>
 	</div><!-- container -->
 

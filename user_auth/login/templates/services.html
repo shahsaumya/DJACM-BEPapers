@@ -2,25 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-   
-    <!-- Bootstrap core CSS -->
-    <link href="{%static 'css/bootstrap.css' %}" rel="stylesheet">
-    <link href="{%static 'css/font-awesome.min.css' %}" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="{%static 'css/main.css' %}" rel="stylesheet">
-    <title> Add a new project | Papers </title>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+    {% include 'head.html' with metatitle='Add a new project | DJ ACM' %}
     <style type="text/css">
       input,textarea{
         float:right;
@@ -32,28 +14,7 @@
   </head>
 
   <body>
-
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a href="/index/"><img src="{%static 'img/acm.png' %}" style = "float:left; width:6%; height:6%;"></a>
-
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-center">
-            <li><a href="/index/">HOME</a></li>
-            <li class = "active"><a href="/upload/">UPLOAD</a></li>
-                  <li><a href="#">VIEW</a></li>
-          </ul>
-          <div class = "nav navbar-nav navbar-right" style = "padding-top: 15px">
-            <input class = "search-text" type = text width = 250px>&nbsp&nbsp&nbsp
-          <i class = "fa fa-search"></i>
-        </div>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-    </div>
-
+  {% include 'navbar.html' %}
 	<div id="blue">
 		<div class="container">
 			<div class="row centered">
@@ -69,7 +30,7 @@
 	<div class = "row centered" style="margin-left:33% ; margin-right:33%; margin-top:60px; max-width:100%">
 
 
-  <form id="project_form" method="post" action="{% url 'add_project' %}">
+  <form id="project_form" method="post" action="{% url 'add-project' %}">
   <div class="form-group row">
       {{project_form.as_p}}
       </div>
@@ -149,7 +110,7 @@
             fd.video = video;
             fd.pdf_url = firebase_path;
             console.log(fd);
-            qwest.post('{% url 'add_project' %}', fd)
+            qwest.post('{% url 'add-project' %}', fd)
               .then(function(){
                 window.location.href = '/index/';
               });

@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="{% url 'index' %}"><img src="{% static 'img/acm.png' %}" style = "float:left; width:6%; height:6%;"></a>
+
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-center">
+        <li {% if view_is_index %} class="active" {% endif %}>
+          <a href="{% url 'index' %}">HOME</a>
+        </li>
+        <li {% if view_is_upload %} class="active" {% endif %}>
+          <a href="{% url 'upload' %}">UPLOAD</a></li>
+        <li {% if view_is_view %} class="active" {% endif %}>
+          <a href="#">VIEW</a>
+        </li>
+      </ul>
+      <div class = "nav navbar-nav navbar-right" style = "padding-top: 15px">
+        <input class = "search-text" type = text width = 250px>&nbsp&nbsp&nbsp
+      <i class = "fa fa-search"></i>
+    </div>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+</div>

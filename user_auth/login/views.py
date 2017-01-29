@@ -130,3 +130,7 @@ def user_logout(request):
 
     # Take the user back to the homepage.
     return HttpResponseRedirect('/home/')
+
+@login_required
+def view_project(request, project_id, project_slug):
+	return HttpResponse(project_id + project_slug)

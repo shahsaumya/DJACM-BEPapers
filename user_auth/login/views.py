@@ -95,6 +95,7 @@ def add_user(request):
     else: 
         return redirect(reverse('sign-in'))
 
+
 @csrf_exempt
 def add_project(request):
     if request.method == 'POST':
@@ -128,9 +129,16 @@ def user_logout(request):
 def view_project(request, project_id, project_slug):
     try:
         project = Project.objects.get(id=project_id)
-        print project
-        print project.pdf_url
-        return HttpResponse(project.id)
+        context = project.to_dict()
+        context['view_is_view'] = True
+        context['creator_name'] = project.creator.user.first_name + ' ' + project.creator.user.last_name
+
+        print project.creator.user.__dict__
+        if project.active:
+            return render(request, 'view-project.html', context)
+        else:
+            return redirect('/404/')
+
     except ObjectDoesNotExist:
         return redirect('/404/')
 	return HttpResponse(project_id + project_slug)

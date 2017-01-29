@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+from django.shortcuts import reverse
 
 
 def convert_to_dict(obj):
@@ -58,4 +59,7 @@ class Project(models.Model):
         return self.title
 
     def to_dict(self):
-            return convert_to_dict(self)
+        return convert_to_dict(self)
+
+    def get_url(self):
+        return reverse('view', args=(self.id, self.slug, ))

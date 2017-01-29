@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% include 'head.html' with metatitle=title %}
+  <style>
+  .w{
+    margin-bottom: 100px;
+  }
+  .hide-button{
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    display:block; 
+    height: 50px; 
+    width: 70px; 
+    background: rgba(0,0,0,0);
+  }
+  h1{
+    font-weight: 900;
+  }
+  </style>
+</head>
+<body>
+  {% include 'navbar.html' %}
+  <div class="container w">
+    <br>
+    <h1> {{title}} </h1>
+    <h3> A Project By {{creator_name}} </h3>
+    <hr>
+    <div style="position: relative;">
+      <iframe src="https://docs.google.com/viewer?embedded=true&url=http%3A%2F%2Fhomepages.inf.ed.ac.uk%2Fneilb%2FTestWordDoc.doc" frameborder="no" style="width:100%; height: 700px;">
+      </iframe>
+      <div class="hide-button">
+      </div>
+    </div>
+  </div>
+  {% include 'footer.html' %}
+  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-storage.js"></script>
+  <script type="text/javascript">
+    var id =  function(id){ return document.getElementById(id); }
+
+    var config = {
+      apiKey: "AIzaSyCxHaCCZwuMxNN1OB58_CjeB_yUMmWc5mE",
+      authDomain: "bepapers-66893.firebaseapp.com",
+      databaseURL: "https://bepapers-66893.firebaseio.com",
+      storageBucket: "bepapers-66893.appspot.com",
+      messagingSenderId: "371274869294"
+    };
+
+    firebase.initializeApp(config);
+    var storage = firebase.storage();
+    var storage_ref = storage.ref('pdfs/{{pdf_url}}');
+    storage_ref.getDownloadURL().then(function(url) {
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function(event) {
+        var blob = xhr.response;
+      };
+      xhr.open('GET', url);
+      xhr.send();
+      var frame = document.getElementsByTagName('iframe')[0];
+      frame.src = 'http://docs.google.com/viewer?embedded=true&url='+ encodeURIComponent(url);
+    }).catch(function(error) {
+      console.log(error);
+    });
+  </script>
+</body>
+</html>

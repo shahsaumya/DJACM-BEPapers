@@ -22,4 +22,3 @@ urlpatterns = [
     url(r'^upload/$', views.project_form, name = 'upload'),
     url(r'^view/(?P<project_id>\d+)/(?P<project_slug>[\w-]+)/$', views.view_project, name='view-project'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-

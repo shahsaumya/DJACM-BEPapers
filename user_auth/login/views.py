@@ -5,18 +5,17 @@ from login.models import Project, UserProfile
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from login.forms import UserForm, UserProfileForm, ProjectForm
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.core.exceptions import ObjectDoesNotExist
 
-from .models import Project
 
-# Create your views here.
 @login_required
 def index(request):
-    return render(request,'index.html')
+    return render(request,'index.html', {'view_is_index': True})
 
 
 def about(request):
@@ -24,21 +23,23 @@ def about(request):
 
 
 def home(request):
+    if request.user.is_authenticated():
+        return redirect(reverse('index'))
     return render(request,'home.html')
 
 
 def register(request):
-    #context = RequestContext(request)
     registered = False
     
     user_form = UserForm()
     profile_form = UserProfileForm()
 
-    #if request.user.is_authenticated():
-     #   return redirect('/index/')
+    # Prevent logged in users from registering again
+    if request.user.is_authenticated():
+       return redirect(reverse('index'))
 
-    #else:
-    return render(request, 'register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+    else:
+        return render(request, 'register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 
 @csrf_protect
@@ -51,7 +52,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect('/index/')
+                return redirect(reverse('index'))
             else:
                 return HttpResponse("Your account is disabled.")
         else:
@@ -59,16 +60,12 @@ def user_login(request):
             print ("Invalid login details: {0}, {1}".format(username, password))
             return HttpResponse("Invalid login details supplied.")
 
-    else:
-        return render(request, 'sign-in.html', {})
-
-
-@csrf_protect
-def login_form(request):
-    if request.user.is_authenticated():
-        return redirect('/index/')
-    else:
-        return render(request, 'sign-in.html', {})
+    elif request.method == 'GET':
+        print request.user
+        if request.user.is_authenticated:
+             return redirect(reverse('index'))
+        else:
+            return render(request, 'sign-in.html', {})
 
 
 def add_user(request):
@@ -87,16 +84,17 @@ def add_user(request):
                  
                 profile.save()
                 registered = True
-                return redirect('/sign-in/')
+                return redirect(reverse('sign-in'))
 
             except:
-                return redirect('/sign-in/')
+                return redirect(reverse('sign-in'))
 
         else:
             print (user_form.errors, profile_form.errors)
-            return redirect('/register')
+            return redirect(reverse('register'))
     else: 
-        return redirect('/sign-in/')
+        return redirect(reverse('sign-in'))
+
 
 @csrf_exempt
 def add_project(request):
@@ -106,27 +104,54 @@ def add_project(request):
                           video_url=data['video'], pdf_url=data['pdf_url'], 
                           creator=UserProfile.objects.get(user=request.user))
         project.save()
-        return redirect('/index/')
-        
+        return redirect(reverse('index'))
 
-#def login(request):
-#    return render(request, 'about.html')
-
-def upload(request):
-    return render(request , 'services.html')
 
 @csrf_exempt
 @login_required
 def project_form(request):
     return render(request, 'services.html', 
             {'project_form': ProjectForm(),
-             'username' : request.user.username})
+             'username' : request.user.username,
+             'view_is_upload': True})
 
 
 @login_required
 def user_logout(request):
     # Since we know the user is logged in, we can now just log them out.
     logout(request)
-
     # Take the user back to the homepage.
-    return HttpResponseRedirect('/home/')
+    return HttpResponseRedirect(reverse('home'))
+
+
+# View individual projects, searching by id
+@login_required
+def view_project(request, project_id, project_slug):
+    try:
+        project = Project.objects.get(id=project_id)
+        context = project.to_dict()
+        context['view_is_view'] = True
+        context['creator_name'] = project.creator.user.first_name + ' ' + project.creator.user.last_name
+
+        print project.creator.user.__dict__
+        if project.active:
+            return render(request, 'view-project.html', context)
+        else:
+            return redirect('/404/')
+
+    except ObjectDoesNotExist:
+        return redirect('/404/')
+	return HttpResponse(project_id + project_slug)
+
+
+# !!! This is a view only for testing, remove this in production
+def all_projects(request):
+    projects  = Project.objects.all()
+    response = ''
+    for project in projects:
+        response+='<p><h1>' + project.title +\
+                        '<span style="font-size: 18px; margin-left: 15px;">'\
+                        '<a href="' + project.get_url() + '">Link</a></span>'\
+                        '</h1></p>'
+        print project.get_url()
+    return HttpResponse(response)

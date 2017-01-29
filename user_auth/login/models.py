@@ -62,4 +62,4 @@ class Project(models.Model):
         return convert_to_dict(self)
 
     def get_url(self):
-        return reverse('view', args=(self.id, self.slug, ))
+        return reverse('view-project', args=(self.id, self.slug, ))

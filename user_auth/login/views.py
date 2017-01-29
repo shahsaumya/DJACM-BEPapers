@@ -142,3 +142,16 @@ def view_project(request, project_id, project_slug):
     except ObjectDoesNotExist:
         return redirect('/404/')
 	return HttpResponse(project_id + project_slug)
+
+
+# !!! This is a view only for testing, remove this in production
+def all_projects(request):
+    projects  = Project.objects.all()
+    response = ''
+    for project in projects:
+        response+='<p><h1>' + project.title +\
+                        '<span style="font-size: 18px; margin-left: 15px;">'\
+                        '<a href="' + project.get_url() + '">Link</a></span>'\
+                        '</h1></p>'
+        print project.get_url()
+    return HttpResponse(response)

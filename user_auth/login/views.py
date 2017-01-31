@@ -18,6 +18,10 @@ from .models import Project
 def index(request):
     return render(request,'index.html')
 
+def works(request):
+    return render(request,'works.html')
+    
+
 
 def about(request):
     return render(request,'about.html')    

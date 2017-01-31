@@ -17,9 +17,6 @@ class UserForm(forms.ModelForm):
                         }
 
 class UserProfileForm(forms.ModelForm):
-    branch = forms.CharField(
-        widget = forms.TextInput(attrs = {'class':"input-lg", 'size':"40"}),
-    )
     domain = forms.CharField(
         widget = forms.TextInput(attrs = {'class':"input-lg", 'size':"40"}),
     )

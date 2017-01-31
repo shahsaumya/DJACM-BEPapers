@@ -1,21 +1,106 @@
+{% load staticfiles %}
 <html>
     <head>
         <!-- Is anyone getting tired of repeatedly entering the header over and over?? -->
+        {% include 'head.html' with metatitle='Add a new project | DJ ACM' %}
         <title>DJ ACM</title>
     </head>
+    <style type="text/css">
+        #shift  {margin-left:380px;margin-top: 240px}
+
+
+         #username {margin-left: 40px;}
+         #password {margin-left: 40px;}
+
+    </style>
+
+
 
     <body>
-        <h1>Login to DJ ACM BE PAPERS</h1>
+    
+
+
+
+
+
+            <div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="{% url 'index' %}"><img src="{% static 'img/acm.png' %}" style = "float:left; width:6%; height:6%;"></a>
+
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-center">
+        <li  >
+          <a href="/register/">REGISTER</a>
+        </li>
+        
+            <li  class="active">
+          <a href="/sign-in/">SIGN-IN</a>
+        </li>
+      </ul>
+    
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+</div>
+
+
+
+<!--
+
+    <div id="blue">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                <h4>LOGIN to DJ ACM BE PAPERS</b></h4>
+                                </div>
+            </div><!-- row -->
+     
+     <!--   </div>--><!-- container -->
+   <!-- </div>--><!-- blue wrap -->
+
+
+
+        <!--<h1>Login to DJ ACM BE PAPERS</h1>-->
+        <div id="shift">
 
         <form id="login_form" method="post" action="/sign-in/">
             {% csrf_token %}
-            Username: <input type="text" name="username" value="" size="50" />
+           <strong> Username:</strong > <input type="text" name="username" value="" size="30"  id="username" class= "input-lg"/>
             <br />
-            Password: <input type="password" name="password" value="" size="50" />
+            <br/>
+            <br/>
+           <strong>Password:</strong >  <input type="password" name="password" value="" size="30" id="password" class= "input-lg"/>
             <br />
+            <br/>
+            <br/>
 
-            <input type="submit" value="submit" />
+
+ 
+            <input type="submit" value="SUBMIT" class="btn btn-primary" style="margin-left:200px" />
+          
         </form>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</body>
+
+    <div id="r">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h4> LOGIN to DJ ACM BE PAPERS </h4>
+                    <p></p>
+                </div>
+            </div><!-- row -->
+        </div><!-- container -->
+    </div>
+     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="{%static 'js/bootstrap.min.js' %}"></script>
 
     </body>
 </html>

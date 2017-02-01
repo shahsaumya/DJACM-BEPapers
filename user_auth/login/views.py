@@ -65,7 +65,7 @@ def user_login(request):
             return HttpResponse("Invalid login details supplied.")
 
     elif request.method == 'GET':
-        print request.user
+        print(request.user)
         if request.user.is_authenticated:
              return redirect(reverse('index'))
         else:
@@ -137,7 +137,7 @@ def view_project(request, project_id, project_slug):
         context['view_is_view'] = True
         context['creator_name'] = project.creator.user.first_name + ' ' + project.creator.user.last_name
 
-        print project.creator.user.__dict__
+        print (project.creator.user.__dict__)
         if project.active:
             return render(request, 'view-project.html', context)
         else:
@@ -157,5 +157,5 @@ def all_projects(request):
                         '<span style="font-size: 18px; margin-left: 15px;">'\
                         '<a href="' + project.get_url() + '">Link</a></span>'\
                         '</h1></p>'
-        print project.get_url()
+        print (project.get_url())
     return HttpResponse(response)

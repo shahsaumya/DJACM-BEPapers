@@ -145,7 +145,7 @@ def view_project(request, project_id, project_slug):
 
     except ObjectDoesNotExist:
         return redirect('/404/')
-	return HttpResponse(project_id + project_slug)
+    return HttpResponse(project_id + project_slug)
 
 
 # !!! This is a view only for testing, remove this in production

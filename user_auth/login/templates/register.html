@@ -9,20 +9,13 @@
         <title>DJ ACM</title>
 
   <style type="text/css">
-        #shift  {margin-left:380px;margin-top: 200px}
-
-             input,textarea{
-       margin: 10px;
+        <style type="text/css">
+    input,textarea{
+        float:right;
       }
-
-         #id_first_name {margin-left: 40px;}
-         #id_last_name {margin-left: 41px;}
-         #id_username {margin-left: 40px;}
-         #id_password {margin-left: 40px}
-         #id_email {margin-left: 72px;}
-         #id_domain {margin-left: 52px;}
-         #id_branch {margin-left: 54px;}
- 
+      label,strong,p{
+        float:left;
+      }
  
     </style>
 
@@ -54,27 +47,33 @@
   </div>
 </div>
 </div>
-
-      <div id="shift">
+          <div class="container w" >
+  <div class = "row centered" style="margin-left:33% ; margin-right:33%; margin-top:60px; max-width:100%">
 
         {% if registered %}
          <strong>Thank you for registering!</strong>
         <a href="/home/">Return to the homepage.</a><br/>
         {% else %}
         <!--<strong>Register here!</strong><br />-->
-        <div class = "form-group row">
 	<form id="user_form" method="post" action="{% url 'add-user' %}">
             {% csrf_token %}
             <!-- Display each form. The as_p method wraps each element in a paragraph
                  (<p>) element. This ensures each element appears on a new line,
                  making everything look neater. -->
-
+                 <div class = "form-group row">
                 {{ user_form.as_p }}
+                </div>
+                <div class = "form-group row">
 	           {{ profile_form.as_p }}
-            <input type="submit" name="submit" value="REGISTER"  class="btn btn-primary" style="margin-left:220px" />
+               </div>
+               <br>
+               <div class = "form-group row">
+        <button type="submit" name="submit" value="REGISTER"  class="btn btn-lg btn-primary" style="margin-left:220px">Submit</button>
+            </div>
         </form>
+                {% endif %}
         </div>
-        {% endif %}
+
 
         </div>
 <br/>

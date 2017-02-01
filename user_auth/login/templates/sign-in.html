@@ -6,11 +6,18 @@
         <title>DJ ACM</title>
     </head>
     <style type="text/css">
-        #shift  {margin-left:380px;margin-top: 240px}
+    input,textarea{
+        float:right;
+      }
+      label,strong,p{
+        float:left;
+      }
 
-
-         #username {margin-left: 40px;}
-         #password {margin-left: 40px;}
+      #r{
+          position: fixed;
+          bottom: 0px;
+          width: 100%;
+      }
 
     </style>
 
@@ -62,32 +69,29 @@
 
 
         <!--<h1>Login to DJ ACM BE PAPERS</h1>-->
-        <div id="shift">
+          <div class="container w" >
+  <div class = "row centered" style="margin-left:33% ; margin-right:33%; margin-top:60px; max-width:100%">
 
         <form id="login_form" method="post" action="/sign-in/">
+
             {% csrf_token %}
-           <strong> Username:</strong > <input type="text" name="username" value="" size="30"  id="username" class= "input-lg"/>
-            <br />
-            <br/>
-            <br/>
-           <strong>Password:</strong >  <input type="password" name="password" value="" size="30" id="password" class= "input-lg"/>
-            <br />
-            <br/>
-            <br/>
-
-
- 
-            <input type="submit" value="SUBMIT" class="btn btn-primary" style="margin-left:200px" />
-          
+            <div class = "form-group row">
+           <strong> Username:</strong > 
+           <input type="text" name="username" value="" size="40"  id="username" class= "input-lg"/>
+           </div>
+           <br>
+           <div class="form-group row">
+           <strong>Password:</strong >
+           <input type="password" name="password" value="" size="40" id="password" class= "input-lg"/>
+           </div>
+           <br>
+           <br>
+          <div class = "form-group row">
+            <button type="submit" value="SUBMIT" class="btn btn-lg btn-primary">Submit</button>
+          </div>
         </form>
+      </div>
 </div>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-</body>
 
     <div id="r">
         <div class="container">

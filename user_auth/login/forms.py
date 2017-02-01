@@ -4,11 +4,33 @@ from django import forms
 from django.forms import Textarea
 
 class UserForm(forms.ModelForm):
-	password = forms.CharField(widget=forms.PasswordInput())
-	class Meta:
-		model = User
-		fields = ('first_name','last_name','username','email','password')
-		labels = {
+  password = forms.CharField (widget=forms.PasswordInput(attrs={'class': "input-lg", 'size':"35"}))
+  first_name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': "input-lg", 'size':"35"}),
+  )
+  last_name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': "input-lg", 'size':"35"}),
+  )
+  username = forms.CharField(
+        widget=forms.TextInput(attrs={'class': "input-lg", 'size':"35"}),
+  )
+  email = forms.CharField(
+        widget=forms.TextInput(attrs={'class': "input-lg", 'size':"35"}),
+  )
+  #last_name = forms.CharField(
+   #     widget=forms.TextInput(attrs={'class': "input-lg", 'size':"40"}),
+   # )
+  #username = forms.CharField(
+   #     widget=forms.TextInput(attrs={'class': "input-lg", 'size':"40"}),
+   # )
+  #email = forms.CharField(
+   #     widget=forms.TextInput(attrs={'class': "input-lg", 'size':"40"}),
+   # )
+
+  class Meta:
+    model = User
+    fields = ('first_name','last_name','username','email','password')
+    labels = {
                           'first_name' :('First Name'),
                           'last_name' :('Last Name'),
                           'Username' :('Username'),
@@ -18,14 +40,16 @@ class UserForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     domain = forms.CharField(
-        widget = forms.TextInput(attrs = {'class':"input-lg", 'size':"40"}),
+        widget = forms.TextInput(attrs = {'class':"input-lg", 'size':"35"}),
     )
     class Meta:
         model = UserProfile
-        fields = ('branch','domain')
+        fields = ('domain','branch')
         labels = {
-                 'branch' :('Branch'),
                  'domain' :('Domain'),
+
+                 'branch' :('Branch'),
+                 
                  }
 
 class ProjectForm(forms.ModelForm):

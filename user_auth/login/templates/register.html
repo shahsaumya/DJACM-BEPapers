@@ -1,17 +1,67 @@
+
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
     <head>
+    
+
+        {% include 'head.html' with metatitle='Add a new project | DJ ACM' %}
         <title>DJ ACM</title>
+
+  <style type="text/css">
+        #shift  {margin-left:380px;margin-top: 200px}
+
+             input,textarea{
+       margin: 10px;
+      }
+
+         #id_first_name {margin-left: 40px;}
+         #id_last_name {margin-left: 41px;}
+         #id_username {margin-left: 40px;}
+         #id_password {margin-left: 40px}
+         #id_email {margin-left: 72px;}
+         #id_domain {margin-left: 52px;}
+         #id_branch {margin-left: 54px;}
+ 
+ 
+    </style>
+
+
+
     </head>
 
     <body>
-        <h1>Register with DJ ACM</h1>
+
+
+
+            <div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="{% url 'index' %}"><img src="{% static 'img/acm.png' %}" style = "float:left; width:6%; height:6%;"></a>
+
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-center">
+        <li class="active" >
+          <a href="/register/">REGISTER</a>
+        </li>
+        
+            <li  >
+          <a href="/sign-in/">SIGN-IN</a>
+        </li>
+      </ul>
+    
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+</div>
+
+      <div id="shift">
 
         {% if registered %}
          <strong>Thank you for registering!</strong>
         <a href="/home/">Return to the homepage.</a><br/>
         {% else %}
-        <strong>Register here!</strong><br />
+        <!--<strong>Register here!</strong><br />-->
         <div class = "form-group row">
 	<form id="user_form" method="post" action="{% url 'add-user' %}">
             {% csrf_token %}
@@ -21,9 +71,30 @@
 
                 {{ user_form.as_p }}
 	           {{ profile_form.as_p }}
-            <input type="submit" name="submit" value="Register" />
+            <input type="submit" name="submit" value="REGISTER"  class="btn btn-primary" style="margin-left:220px" />
         </form>
         </div>
         {% endif %}
+
+        </div>
+<br/>
+<br/>
+
+
+
+
+         <div id="r">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h4> REGISTER WITH DJ ACM</h4>
+                    <p></p>
+                </div>
+            </div><!-- row -->
+        </div><!-- container -->
+    </div>
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="{%static 'js/bootstrap.min.js' %}"></script>
     </body>
 </html>

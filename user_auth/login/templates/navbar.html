@@ -12,7 +12,7 @@
         <li {% if view_is_upload %} class="active" {% endif %}>
           <a href="{% url 'upload' %}">UPLOAD</a></li>
         <li {% if view_is_view %} class="active" {% endif %}>
-          <a href="#">VIEW</a>
+          <a href="{% url 'all-projects'%}">VIEW</a>
         </li>
       </ul>
       <div class = "nav navbar-nav navbar-right" style = "padding-top: 15px">

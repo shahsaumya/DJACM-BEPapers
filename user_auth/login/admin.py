@@ -5,7 +5,7 @@ from django.contrib import admin
 # Register your models here.
 
 
-from login.models import Project, UserProfile
+from login.models import Project, UserProfile,Teacher
 
 
 admin.site.register(UserProfile)

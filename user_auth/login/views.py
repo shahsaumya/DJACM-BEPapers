@@ -168,9 +168,11 @@ def search(request):
         query = request.GET['query']
         if not query:
             error.append('Please enter a search term')
-        else:
+        elif query:
             results = Project.objects.filter(Q(domain__icontains = query)| Q(teacher_coordinator__icontains = query))
             return render(request,'search.html',{'results':results,'query':query})
+        else:
+            error.append('Project not found')
 
         projects = Projects.objects.all()
         return render(request,'search.html',{'errors':errors,'all':projects})

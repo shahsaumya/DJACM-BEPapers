@@ -25,7 +25,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None)
     #profile_pic = models.ImageField(uploadTo='profile_pic', blank=True)
     branch = models.CharField(max_length=2, choices=DEPARTMENTS, default='CO')
-    domain = models.CharField(max_length=30)
+    domain = models.CharField(max_length=30, default=None)
     team_participant_2 = models.CharField(max_length = 30, blank = True, null = True, default = None)
     team_participant_3 = models.CharField(max_length = 30, blank = True, null = True, default = None)
     team_participant_4 = models.CharField(max_length = 30, blank = True, null = True, default = None)
@@ -39,6 +39,14 @@ class UserProfile(models.Model):
     def to_dict(self):
             return convert_to_dict(self)
 
+class Teacher(models.Model):
+    teacher_coordinator = models.CharField(max_length = 30, default = None)
+
+    def __str__(self):
+        return self.teacher_coordinator
+
+    def to_dict(self):
+        return convert_to_dict(self)
 
 class Project(models.Model):
     title = models.CharField(max_length=300, default='Untitled Project')
@@ -68,11 +76,3 @@ class Project(models.Model):
     def get_url(self):
         return reverse('view-project', args=(self.id, self.slug, ))
 
-class Teacher(models.Model):
-    teacher_coordinator = models.CharField(max_length = 30, default = None)
-
-    def __str__(self):
-        return self.teacher_coordinator
-
-    def to_dict(self):
-        return convert_to_dict(self)

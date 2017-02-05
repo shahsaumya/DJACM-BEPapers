@@ -17,6 +17,18 @@ class UserForm(forms.ModelForm):
   email = forms.CharField(
         widget=forms.TextInput(attrs={'class': "input-lg", 'size':"40"}),
   )
+  team_participant_2 = forms.CharField(
+        widget = forms.TextInput(attrs={'class':"input-lg", 'size':"40"}),
+        required = False,
+  )
+  team_participant_3 = forms.CharField(
+        widget = forms.TextInput(attrs={'class':"input-lg", 'size':"40"}),
+        required = False,
+  )
+  team_participant_4 = forms.CharField(
+        widget = forms.TextInput(attrs={'class':"input-lg", 'size':"40"}),
+        required = False,
+  )
   #last_name = forms.CharField(
    #     widget=forms.TextInput(attrs={'class': "input-lg", 'size':"40"}),
    # )
@@ -39,20 +51,42 @@ class UserForm(forms.ModelForm):
                         }
 
 class UserProfileForm(forms.ModelForm):
-    domain = forms.CharField(
-        widget = forms.TextInput(attrs = {'class':"input-lg", 'size':"40"}),
-    )
-    class Meta:
-        model = UserProfile
-        fields = ('domain','branch')
-        labels = {
+
+  domain = forms.CharField(
+       widget = forms.TextInput(attrs={'class':"input-lg", 'size':"40"}),
+   )
+
+  team_participant_2 = forms.CharField(
+        widget = forms.TextInput(attrs={'class':"input-lg", 'size':"40"}),
+        required = False,
+  )
+  team_participant_3 = forms.CharField(
+        widget = forms.TextInput(attrs={'class':"input-lg", 'size':"40"}),
+        required = False,
+  )
+  team_participant_4 = forms.CharField(
+        widget = forms.TextInput(attrs={'class':"input-lg", 'size':"40"}),
+        required = False,
+  )
+    
+  class Meta:
+      model = UserProfile
+      fields = ('domain','branch')
+      labels = {
                  'domain' :('Domain'),
 
                  'branch' :('Branch'),
+
+                 'team_participant_2':('Team Member'),
+
+                 'team_participant_3':('Team Member'),
+
+                 'team_participant_4':('Team Member'),
                  
-                 }
+               }
 
 class ProjectForm(forms.ModelForm):
+
     title = forms.CharField(
         widget=forms.TextInput(attrs={'class': "input-lg", 'size':"40"}),
     )
@@ -65,13 +99,17 @@ class ProjectForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': "input-lg",'size':"40"}),
     )
 
+    teacher_coordinator = forms.ChoiceInput(
+        widget = forms.Select(attrs={'class': "input-lg", 'size':"40"}),
+    )
    
 
     class Meta: 
         model = Project
-        fields = ('title', 'video_url', 'description')
+        fields = ('title', 'video_url', 'description','teacher_coordinator')
         labels = {
                 'title': ('Project Name'),
                 'description':('Add a description'),
                 'video_url': ('Add a video'),
+                'teacher_coordinator':('Teacher In-Charge'),
                 }

@@ -26,6 +26,9 @@ class UserProfile(models.Model):
     #profile_pic = models.ImageField(uploadTo='profile_pic', blank=True)
     branch = models.CharField(max_length=2, choices=DEPARTMENTS, default='CO')
     domain = models.CharField(max_length=30)
+    team_participant_2 = models.CharField(max_length = 30, blank = True, null = True, default = None)
+    team_participant_3 = models.CharField(max_length = 30, blank = True, null = True, default = None)
+    team_participant_4 = models.CharField(max_length = 30, blank = True, null = True, default = None)
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
@@ -42,6 +45,7 @@ class Project(models.Model):
     pdf_url = models.URLField(max_length=600, editable=False, default=None)
     video_url = models.URLField(max_length=600, default=None)
     creator = models.OneToOneField(UserProfile, on_delete=models.CASCADE, default=None)
+    teacher_coordinator = models.ForeignKey(Teacher, on_delete=models.CASCADE, default=None)
     description = models.TextField(default=None)
     slug = models.SlugField(max_length=75, editable=False, default='untitled-project')
     active = models.BooleanField(default=True)
@@ -63,3 +67,12 @@ class Project(models.Model):
 
     def get_url(self):
         return reverse('view-project', args=(self.id, self.slug, ))
+
+class Teacher(models.Model):
+    teacher_coordinator = models.CharField(max_length = 30, default = None)
+
+    def __str__(self):
+        return self.teacher_coordinator
+
+    def to_dict(self):
+        return convert_to_dict(self)

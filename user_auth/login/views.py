@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from user_auth.forms import ProjectForm
 from django.http import HttpResponse
-from login.models import Project, UserProfile
+from login.models import Project, UserProfile, Teacher
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
@@ -11,7 +11,7 @@ from login.forms import UserForm, UserProfileForm, ProjectForm
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
-
+from django.db.models import Q
 
 @login_required
 def index(request):
@@ -161,6 +161,22 @@ def all_projects(request):
    #print (projects[0].get_url())
     # return HttpResponse(response)
     return render(request, 'all-projects.html', {'projects': projects})
+
+def search(request):
+    errors = []
+    if 'query' in request.GET:
+        query = request.GET['query']
+        if not query:
+            error.append('Please enter a search term')
+        else:
+            results = Project.objects.filter(Q(domain__icontains = query)| Q(teacher_coordinator__icontains = query))
+            return render(request,'search.html',{'results':results,'query':query})
+
+        projects = Projects.objects.all()
+        return render(request,'search.html',{'errors':errors,'all':projects})
+
+
+
 
 
 
